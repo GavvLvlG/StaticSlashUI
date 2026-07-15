@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
     void SpawnNewItem(Item item, InventorySlot slot)
     {
         GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
-        inventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
+        InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
         inventoryItem.InitializeItem(item);
     }
 }
