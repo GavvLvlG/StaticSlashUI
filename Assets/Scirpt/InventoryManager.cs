@@ -22,7 +22,14 @@ public class InventoryManager : MonoBehaviour
     void SpawnNewItem(Item item, InventorySlot slot)
     {
         GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
+        // Ensure instantiated GameObject has a non-empty name (some Unity versions/runtime checks forbid empty names)
+        if (newItemGo != null)
+        {
+            string safeName = (item != null && !string.IsNullOrEmpty(item.name)) ? item.name : "InventoryItem";
+            if (string.IsNullOrEmpty(newItemGo.name)) newItemGo.name = safeName;
+        }
         InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
         inventoryItem.InitializeItem(item);
     }
 }
+
